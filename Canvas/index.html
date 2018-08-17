@@ -39,6 +39,28 @@
         width: 30px;
         height: 30px;
         text-align: center;
+        cursor: pointer;
+      }
+
+      .defectImage {
+        max-width: 300px;
+      }
+
+      .defectWrapper {
+        display: none;
+        position: absolute;
+        margin: 30px;
+        background: rgba(0,0,0,0.3);
+        text-align: center;
+        padding: 10px;
+        color: #ffff;
+        z-index: 10;
+      }
+
+      .defectText {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 10px;
       }
     </style>
   </head>
@@ -46,6 +68,9 @@
     <div id="canvasWrapper" style="position: relative;">
      <canvas id="backgroundLayer" width="1024" height="768"
        style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+       <div class="defectWrapper">
+
+       </div>
     </div>
     <div class="carouselWrapper">
       <div class="productCarousel" id="tableCarousel">
