@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 
-const ImagesConfig = require('../config/index');
+const MasterConfig = require('../config/index');
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
 
 router.get('/visualizer/viewer', (req, res) => {
   res.render('visualizer/viewer/index', {
-    allSofas: _.get(ImagesConfig, 'sofas', []),
-    allTables: _.get(ImagesConfig, 'tables', []),
+    sofasConfig: _.get(MasterConfig, 'sofas', []),
+    tablesConfig: _.get(MasterConfig, 'tables', []),
   });
 });
 
