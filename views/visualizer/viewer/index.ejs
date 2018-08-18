@@ -18,20 +18,30 @@
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xl-10 col-lg-12">
-        <div style="width:985px; height:200px; background-color: beige; overflow:auto">
-          <p>One of two columns</p>
+      <div class="col-xl-10 col-lg-12 col">
+        
+        <div id="canvasWrapper" style="position: relative;">
+          <canvas id="backgroundLayer" width="1024" height="768" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+          <div class="defectWrapper">
+        
+          </div>
         </div>
       </div>
-      <div class="col-xl-2 col-lg-3">
-        <div style="background-color:cadetblue">
-            <!-- Carousal Start -->
-          <p>SOFA</p>
+      <div class="col-xl-2 col-lg-3 col">
+        <div style="background-color: lightgrey">
+          <!-- Carousal Start -->
+          <div class="row">
+            <div class="col-sm-12">
+              <p class="lead" style="text-align: center;">
+                TABLE
+              </p>
+            </div>
+          </div>
           <div id="carouselExampleFade1" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
-            	<% for(var i = 1; i <= Object.keys(sofasConfig).length; i++){ %>
+            	<% for(var i = 1; i <= Object.keys(tablesConfig).length; i++){ %>
             		<div class="carousel-item <%= i === 1 ? 'active' : '' %>">
-	                <img class="d-block w-100" src="<%= sofasConfig[i].path %>" >
+	                <img class="d-block w-100" src="<%= tablesConfig[i].path %>" >
 	              </div>
             	<% } %>
             </div>
@@ -44,15 +54,24 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+          <div class="col-sm-12" style="text-align: center;">
+            <button id="remove-table" type="button" class="btn btn-outline-dark">REMOVE</button>
+          </div>
           <!-- Carousal End -->
           <hr>
           <!-- Carousal Start -->
-          <p>TABLE</p>
+          <div class="row">
+            <div class="col-sm-12">
+              <p class="lead" style="text-align: center;">
+                SOFA
+              </p>
+            </div>
+          </div>
           <div id="carouselExampleFade2" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
-            	<% for(var i = 1; i <= Object.keys(tablesConfig).length; i++){ %>
+            	<% for(var i = 1; i <= Object.keys(sofasConfig).length; i++){ %>
             		<div class="carousel-item <%= i === 1 ? 'active' : '' %>">
-	                <img class="d-block w-100" src="<%= tablesConfig[i].path %>" >
+	                <img class="d-block w-100" src="<%= sofasConfig[i].path %>" >
 	              </div>
             	<% } %>
             </div>
@@ -65,7 +84,13 @@
               <span class="sr-only">Next</span>
             </a>
           </div>
+          <div class="col-sm-12" style="text-align: center;">
+            <button id="remove-sofa" type="button" class="btn btn-outline-dark">REMOVE</button>
+          </div>
           <!-- Carousal End -->
+        </div>
+        <div class="col-sm-12" style="text-align: center; padding-top: 50px;">
+          <a id="download-image" download="sample.png" type="button" class="btn btn-outline-dark">Download image</a>
         </div>
       </div>
     </div>
@@ -79,6 +104,8 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+  <!-- Canvas script -->
+  <script type="text/javascript" src="/visualizer/canvas.js"></script>
 </body>
 
 </html>

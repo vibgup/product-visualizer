@@ -1,3 +1,37 @@
 img{
 	height: 100px;
 }
+.col{
+	padding: 0;
+}
+.defectNumber {
+	line-height: 30px;
+	z-index: 5;
+	color: #fff;
+	font-size: 20px;
+	position: absolute;
+	display: inline-block;
+	border: 2px solid #5AC6C7;
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	}
+.defectImage {
+	max-width: 300px;
+}
+.defectWrapper {
+	display: none;
+	position: absolute;
+	margin: 30px;
+	background: rgba(0,0,0,0.3);
+	text-align: center;
+	padding: 10px;
+	color: #ffff;
+	z-index: 10;
+}
+.defectText {
+	color: #fff;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
