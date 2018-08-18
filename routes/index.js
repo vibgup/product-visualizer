@@ -21,4 +21,12 @@ router.get('/visualizer/viewer', (req, res) => {
   });
 });
 
+router.get('/visualizer/capture', (req, res) => {
+  res.render('visualizer/viewer/capture');
+});
+
+router.get('/visualizer/orientation', (req, res) => {
+  res.render('visualizer/viewer/orientation');
+});
+
 module.exports = router;
