@@ -26,6 +26,24 @@
         height: 30px;
         text-align: center;
       }
+      .defectImage {
+        max-width: 300px;
+      }
+      .defectWrapper {
+        display: none;
+        position: absolute;
+        margin: 30px;
+        background: rgba(0,0,0,0.3);
+        text-align: center;
+        padding: 10px;
+        color: #ffff;
+        z-index: 10;
+      }
+      .defectText {
+        color: #fff;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
     </style>
 </head>
 
@@ -38,6 +56,9 @@
         </div> -->
         <div id="canvasWrapper" style="position: relative;">
           <canvas id="backgroundLayer" width="1024" height="768" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+          <div class="defectWrapper">
+        
+          </div>
         </div>
       </div>
       <div class="col-xl-2 col-lg-3">
@@ -73,8 +94,17 @@
 
         <!--  -->
         <div style="background-color:cadetblue">
-            <!-- Carousal Start -->
-          <p>TABLE</p>
+          <!-- Carousal Start -->
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="lead">
+                TABLE
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <button id="remove-table" type="button" class="btn btn-outline-dark">REMOVE</button>
+            </div>
+          </div>
           <div id="carouselExampleFade1" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
               <div class="carousel-item">
@@ -99,7 +129,16 @@
           <!-- Carousal End -->
           <hr>
           <!-- Carousal Start -->
-          <p>SOFA</p>
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="lead">
+                SOFA
+              </p>
+            </div>
+            <div class="col-sm-6">
+              <button id="remove-sofa" type="button" class="btn btn-outline-dark">REMOVE</button>
+            </div>
+          </div>
           <div id="carouselExampleFade2" class="carousel slide carousel-fade" data-ride="carousel" data-interval="false">
             <div class="carousel-inner">
               <div class="carousel-item">
