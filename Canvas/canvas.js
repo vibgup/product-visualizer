@@ -68,6 +68,7 @@ backGroundCtx.font = "30px Arial";
 backGroundCtx.fillStyle = "#5AC6C7";
 
 
+
 var background = new Image();
 var sofa = new Image();
 var table = new Image();
@@ -84,17 +85,30 @@ sofa.id = 3;
 
 function draw(){
   backGroundCtx.drawImage(background , 0,  0);
-  backGroundCtx.drawImage(sofa, config.sofas[sofa.id].x, config.sofas[sofa.id].y, config.sofas[sofa.id].width, config.sofas[sofa.id].height);
-  backGroundCtx.drawImage(table, config.tables[table.id].x, config.tables[table.id].y, config.tables[table.id].width, config.tables[table.id].height);
-  if (config.tables[table.id].defects && config.tables[table.id].defects[1].text) {
-    var defects = config.tables[table.id].defects;
-    Object.keys(defects).forEach((key) => {
-      var left = config.tables[table.id].x + defects[key].x * config.tables[table.id].width;
-      var top = config.tables[table.id].y + defects[key].y * config.tables[table.id].height;
-      $( `<div class="defectNumber" id="${key}" data-product="tables">${key}</div>` ).css({top: top, left: left}).appendTo( "#canvasWrapper" );
-    })
-  } else {
-    $('.defectNumber').remove();
+  if (sofa.draw) {
+    backGroundCtx.drawImage(sofa, config.sofas[sofa.id].x, config.sofas[sofa.id].y, config.sofas[sofa.id].width, config.sofas[sofa.id].height);
+  }
+  $('.defectNumber').remove();
+  $('.defectWrapper').css({display: 'none'});
+  if (table.draw) {
+    backGroundCtx.drawImage(table, config.tables[table.id].x, config.tables[table.id].y, config.tables[table.id].width, config.tables[table.id].height);
+    if (config.tables[table.id].defects && config.tables[table.id].defects[1].text) {
+      var defects = config.tables[table.id].defects;
+      Object.keys(defects).forEach((key) => {
+        var left = config.tables[table.id].x + defects[key].x * config.tables[table.id].width;
+        var top = config.tables[table.id].y + defects[key].y * config.tables[table.id].height;
+        $( `<div class="defectNumber" id="${key}" data-table-id="${table.id}" data-product="tables">${key}</div>` ).css({top: top, left: left}).appendTo( "#canvasWrapper" );
+        $(".defectNumber").off();
+
+      // Re-add event handler for all matching elements
+        $(".defectNumber").on("click", function() {
+            $('.defectWrapper').css({display: 'block'});
+            var defect = config[$(this).data('product')][$(this).data('table-id')].defects[this.id];
+            var defectEle = $( `<div class="defectText">${defect.text}</div><img class="defectImage" src="${defect.image}"/>` );
+            $('.defectWrapper').html(defectEle).css({top: $(this).position().top - 300, left: $(this).position().left});
+        });
+      });
+    }
   }
 }
 
@@ -113,7 +127,9 @@ for(var i=0; i<imageCount; i++){
 }
 
 function allLoaded(){
-    draw()
+  table.draw = true;
+  sofa.draw = true;
+  draw();
 }
 
 $("#tableCarousel li").click(function() {
@@ -121,10 +137,14 @@ $("#tableCarousel li").click(function() {
     if (this.id !== 'remove') {
       table.src = `./Tables/${this.id}.png`
       table.id = this.id;
+      table.draw = true;
       table.onload = function() {
         // tableCtx.scale(2, 2)
         draw();
       }
+    } else {
+      table.draw = false;
+      draw();
     }
 });
 
@@ -133,22 +153,19 @@ $("#sofaCarousel li").click(function() {
     if (this.id !== 'remove') {
       sofa.src = `./Sofas/${this.id}.png`
       sofa.id = this.id;
+      sofa.draw = true;
       sofa.onload = function() {
         // sofaCtx.scale(2, 2)
         draw();
+
       }
+    } else {
+      sofa.draw = false;
+      draw();
+
     }
 });
 
-$(".defectNumber").click(function() {
-    console.log(this.id);
-});
-
-$('.carouselWrapper').on('click', '.defectNumber', function(){
-    // do something here
-    console.log(this.id);
-    
-});
 
 
 // backGroundCtx.scale(1.5,1.5);
